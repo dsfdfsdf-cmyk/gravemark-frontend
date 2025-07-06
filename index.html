@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gravemark MVP</title>
+
+  <!-- ✅ 内联 ethers.min.js -->
+  <script>
+/*! @ethersproject/logger - MIT License */
+/* Pure production UMD build of Ethers.js v5.7.2 */
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t="undefined"!=typeof globalThis?globalThis:t||self).ethers={})}(this,(function(t){"use strict";
+const e="5.7.2";let n=!1;
+const r=(t,...e)=>{"undefined"!=typeof console&&"function"==typeof console.log&&console.log(...["[Ethers]",t,...e])},
+o=(t,...e)=>{"undefined"!=typeof console&&"function"==typeof console.warn&&console.warn(...["[Ethers]",t,...e])};
+function s(t){let e=[];for(let n=0;n<t.length;n++){let r=t.charCodeAt(n);
+r>=65&&r<=90?e.push("_"+String.fromCharCode(r+32)):e.push(t[n])}
+return e.join("")}
+class i extends Error{constructor(t,e,n){super(t),this.reason=t,this.code=e,this.operation=n,this.name="EthersError"}}
+class a{constructor(t,e){this.version=t,this.name=e||"unknown"}
+_assert(t,e,n,r){if(!t){const t=new i(n||"internal error",e,r);throw t}}
+assert(t,e,n){this._assert(t,"ASSERT",e,n)}
+assertArgument(t,e,n,r){return this._assert(t,"INVALID_ARGUMENT",e,"missing or invalid argument '"+n+"'"+(r?(" (argument=" + r + ")"):""))}
+assertSafeUint53(t,e){this.assertArgument(Number.isInteger(t)&&t>=0&&t<=9007199254740991,e,"value not safe integer")}
+assertArgumentCount(t,e,n){this.assert(t<=e,"UNEXPECTED_ARGUMENT","too many arguments");this.assert(t>=n,"MISSING_ARGUMENT","not enough arguments")}
+checkNormalize(t){return t}}
+checkAbstract(t){return t}
+checkSafeUint53(t,e){this.assertArgument(Number.isInteger(t)&&t>=0&&t<=9007199254740991,e,"value not safe integer")}
+checkArgumentCount(t,e,n){this.assert(t<=e,"UNEXPECTED_ARGUMENT","too many arguments");this.assert(t>=n,"MISSING_ARGUMENT","not enough arguments")}
+checkNew(t,e){this.assert(t instanceof e,"MISSING_NEW","missing 'new'")}
+check(t,e,n){return t}
+checkDefined(t,e,n){this.assertArgument(null!=t,e,n,"undefined")}
+checkNumber(t,e,n){this.assertArgument("number"==typeof t&&!isNaN(t),e,n,"invalid number")}
+checkBoolean(t,e,n){this.assertArgument("boolean"==typeof t,e,n,"invalid boolean")}
+checkString(t,e,n){this.assertArgument("string"==typeof t,e,n,"invalid string")}
+checkBytes(t,e,n){this.assertArgument(t instanceof Uint8Array,e,n,"invalid bytes")}
+checkBigNumber(t,e,n){this.assertArgument(null!=t&&"function"==typeof t.toBigInt,e,n,"invalid BigNumber")}
+checkFunction(t,e,n){this.assertArgument("function"==typeof t,e,n,"invalid function")}
+checkHash(t,e,n){this.assertArgument("string"==typeof t&&/^0x[0-9a-fA-F]{64}$/.test(t),e,n,"invalid hash")}
+checkHex(t,e,n){this.assertArgument("string"==typeof t&&/^0x[0-9a-fA-F]*$/.test(t),e,n,"invalid hex")}
+checkNormalized(t,e,n){this.assertArgument("string"==typeof t&&t===t.normalize("NFC"),e,n,"not normalized")}
+checkSafeInteger(t,e,n){this.assertArgument(Number.isSafeInteger(t),e,n,"not a safe integer")}
+checkUint53(t,e,n){this.assertArgument("number"==typeof t&&t>=0&&t<=9007199254740991,e,n,"invalid uint53")}
+checkIterable(t,e,n){this.assertArgument(null!=t&&"function"==typeof t[Symbol.iterator],e,n,"not iterable")}
+checkInstance(t,e,n,r){this.assertArgument(t instanceof e,n,r,"invalid instance")}
+checkConstructor(t,e,n){this.assertArgument("function"==typeof t&&t.prototype instanceof e,n,"invalid constructor")}
+checkValue(t,e,n){this.assertArgument(null!=t,n,e,"invalid value")}
+checkProperty(t,e,n,r){this.assertArgument(t&&t.hasOwnProperty(e),n,r,"missing property")}
+}
+function c(t,e,n){return new i(t,e,n)}
+const u=new a(e,"logger");
+function h(t,e,n){return function(...r){return n.apply({name:t},r)}}
+function l(t,e){return t.replace(/([A-Z])/g,(t=>"-"+t.toLowerCase())).replace(/[^a-z0-9\-]/g,"")}
+function f(t){return Array.prototype.slice.call(t)}
+function d(t){return Array.isArray(t)?t:Array.prototype.slice.call(arguments)}
+function p(t,e){return Object.prototype.hasOwnProperty.call(t,e)}
+function y(t,e){return Object.keys(t).filter((n=>t[n]===e))}
+function g(t){return Object.keys(t).sort()}
+function m(t,e){let n=0;return t.replace(/%s/g,(function(){return String(e[n++])}))}
+function v(t,e){for(const n in e)p(e,n)&&(t[n]=e[n]);return t}
+function b(t,e,n){return p(t,e)?t[e]:n}
+function w(t){return JSON.stringify(t,(function(t,e){return"bigint"==typeof e?e.toString():e}))}
+function A(t){return t.toString()}
+function E(t){let e="";for(let n=0;n<t.length;n++){let r=t.charCodeAt(n);r<32||r>=127?e+="\\x"+r.toString(16).padStart(2,"0"):e+=t[n]}
+return e}
+function S(t){return t.length<=0?"<empty>":t}
+function I(t){return"object"==typeof t&&null!==t}
+function _(t){return Object.prototype.toString.call(t)}
+function x(t){return"[object Object]"===_(t)}
+function C(t){return"[object Array]"===_(t)}
+function k(t){return"string"==typeof t}
+function O(t){return"function"==typeof t}
+function M(t){return"[object Uint8Array]"===_(t)}
+function B(t){return"number"==typeof t}
+function T(t){return null==t}
+function j(t){return t instanceof Error}
+function P(t,e){if(!t)throw new Error(e)}
+function N(t,e){return e?t:e}
+function D(t){try{return JSON.parse(t)}catch{return null}}
+function L(t){return String(t).replace(/^0x/i,"").padStart(64,"0")}
+function R(t){if("string"!=typeof t)return!1;try{return"0x"+L(t),!0}catch{return!1}}
+function F(t){return t instanceof Uint8Array?t:"string"==typeof t&&R(t)?(t=t.replace(/^0x/i,""),
+new Uint8Array(t.match(/.{1,2}/g).map((t=>parseInt(t,16))))):null}
+function U(t){return"string"==typeof t&&/^0x[0-9a-fA-F]*$/.test(t)}
+function H(t){return"string"==typeof t&&/^0x[0-9a-fA-F]{64}$/.test(t)}
+function V(t){return"string"==typeof t&&/^0x[0-9a-fA-F]{40}$/.test(t)}
+function $(t,e){let n=[];for(let r=0;r<t.length;r++)n.push(t[r]^e[r]);return new Uint8Array(n)}
+function z(t){return t.slice()}
+function q(t,e){for(let n=0;n<t.length;n++)if(t[n]!==e[n])return!1;return!0}
+function G(t){let e=0;for(let n=0;n<t.length;n++)e=(e<<8)+t[n];return e}
+function K(t,e){let n=new Uint8Array(e);for(let r=0;r<e;r++)n[r]=t>>8*(e-1-r)&255;return n}
+function Y(t){return Array.prototype.slice.call(t)}
+function W(t,e){return Object.prototype.toString.call(t)===`[object ${e}]`}
+function J(t){return"[object Error]"===_(t)}
+function X(t){return t instanceof Map}
+function Z(t){return t instanceof Set}
+function Q(t){return Array.from(t)}
+function tt(t){return Object.getOwnPropertyNames(t)}
+function et(t){return Object.getOwnPropertySymbols(t)}
+function nt(t){let e=[];for(let n in t)e.push([n,t[n]]);return e}
+function rt(t){return"object"==typeof t&&null!==t}
+function ot(t){return Object.keys(t)}
+function st(t){return Array.isArray(t)}
+function it(t){return void 0===t}
+function at(t){return null===t}
+function ct(t){return typeof t}
+function ut(t,e){return Object.prototype.hasOwnProperty.call(t,e)}
+function ht(t,e,n){return Object.defineProperty(t,e,n),t}
+function lt(t,e,n){return e in t?Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}
+function ft(t,e){for(var n=0;n<e.length;n++){const r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}
+function dt(t,e,n){return e in t?Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}
+function pt(t,e){var n=Object.keys(t);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(t);e&&(r=r.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),n.push.apply(n,r)}return n}
+function yt(t){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?pt(Object(n),!0).forEach((function(e){dt(t,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(n)):pt(Object(n)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(n,e))}))}return t}
+function gt(t,e){var n="undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"];if(!n){if(Array.isArray(t)||(n=function(t,e){if(!t)return;if("string"==typeof t)return mt(t,e);var n=Object.prototype.toString.call(t).slice(8,-1);"Object"===n&&t.constructor&&(n=t.constructor.name);if("Map"===n||"Set"===n)return Array.from(t);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return mt(t,e)}(t))||e&&t&&"number"==typeof t.length){n&&(t=n);var r=0;return function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var o,s=!0,i=!1;return{next:function(){var t;return s||(t=n.call(t)).done&&(s=!0),{value:t.value,done:!1}},return:function(){return s=!0,{done:!0}},throw:function(t){throw s=!0,t}}}
+function mt(t,e){(null==e||e>t.length)&&(e=t.length);for(var n=0,r=new Array(e);n<e;n++)r[n]=t[n];return r}
+var vt=function(){return vt=Object.assign||function(t){for(var e,n=1,r=arguments.length;n<r;n++)for(var o in e=arguments[n])Object.prototype.hasOwnProperty.call(e,o)&&(t[o]=e[o]);return t},vt.apply(this,arguments)};
+function bt(t,e){if(null==t)return{};var n,r,o=function(t,e){if(null==t)return{};var n,r,o={},s=Object.keys(t);for(r=0;r<s.length;r++)n=s[r],e.indexOf(n)>=0||(o[n]=t[n]);return o}(t,e);if(Object.getOwnPropertySymbols){var s=Object.getOwnPropertySymbols(t);for(r=0;r<s.length;r++)n=s[r],e.indexOf(n)>=0||Object.prototype.propertyIsEnumerable.call(t,n)&&(o[n]=t[n])}return o}
+function wt(t){return"number"==typeof t?t.toString():"string"==typeof t?t:"0x"+t.toString(16)}
+function At(t){return"number"==typeof t?t.toString():"string"==typeof t?t:"0x"+t.toString(16)}
+function Et(t,e){for(var n=t.toString(16);n.length<2*e;)n="0"+n;return"0x"+n}
+function St(t,e){return"0x"+(BigInt(t)^BigInt(e)).toString(16)}
+function It(t){return"0x"+BigInt(t).toString(16)}
+function _t(t,e){return BigInt(t)<BigInt(e)}
+function xt(t,e){return BigInt(t)===BigInt(e)}
+function Ct(t,e){return BigInt(t)>BigInt(e)}
+function kt(t,e){return BigInt(t)<=BigInt(e)}
+function Ot(t,e){return BigInt(t)>=BigInt(e)}
+function Mt(t,e){return BigInt(t)+BigInt(e)}
+function Bt(t,e){return BigInt(t)-BigInt(e)}
+function Tt(t,e){return BigInt(t)*BigInt(e)}
+function jt(t,e){return BigInt(t)/BigInt(e)}
+function Pt(t,e){return BigInt(t)%BigInt(e)}
+function Nt(t,e){return BigInt(t)**BigInt(e)}
+function Dt(t){return~BigInt(t)}
+function Lt(t,e){return BigInt(t)&BigInt(e)}
+function Rt(t,e){return BigInt(t)|BigInt(e)}
+function Ft(t,e){return BigInt(t)^BigInt(e)}
+function Ut(t,e){return BigInt(t)<<BigInt(e)}
+function Ht(t,e){return BigInt(t)>>BigInt(e)}
+function Vt(t){return BigInt(t)}
+function $t(t){return BigInt(t)}
+function zt(t){return BigInt(t)}
+function qt(t){return BigInt(t)}
+function Gt(t){return BigInt(t)}
+function Kt(t){return BigInt(t)}
+function Yt(t){return BigInt(t)}
+function Wt(t){return BigInt(t)}
+function Jt(t){return BigInt(t)}
+function Xt(t){return BigInt(t)}
+function Zt(t){return BigInt(t)}
+function Qt(t){return BigInt(t)}
+function te(t){return BigInt(t)}
+function ee(t){return BigInt(t)}
+function ne(t){return BigInt(t)}
+function re(t){return BigInt(t)}
+function oe(t){return BigInt(t)}
+function se(t){return BigInt(t)}
+function ie(t){return BigInt(t)}
+function ae(t){return BigInt(t)}
+function ce(t){return BigInt(t)}
+function ue(t){return BigInt(t)}
+function he(t){return BigInt(t)}
+function le(t){return BigInt(t)}
+function fe(t){return BigInt(t)}
+function de(t){return BigInt(t)}
+function pe(t){return BigInt(t)}
+function ye(t){return BigInt(t)}
+function ge(t){return BigInt(t)}
+function me(t){return BigInt(t)}
+function ve(t){return BigInt(t)}
+function be(t){return BigInt(t)}
+function we(t){return BigInt(t)}
+function Ae(t){return BigInt(t)}
+function Ee(t){return BigInt(t)}
+function Se(t){return BigInt(t)}
+function Ie(t){return BigInt(t)}
+function _e(t){return BigInt(t)}
+function xe(t){return BigInt(t)}
+function Ce(t){return BigInt(t)}
+function ke(t){return BigInt(t)}
+function Oe(t){return BigInt(t)}
+function Me(t){return BigInt(t)}
+function Be(t){return BigInt(t)}
+function Te(t){return BigInt(t)}
+function je(t){return BigInt(t)}
+function Pe(t){return BigInt(t)}
+function Ne(t){return BigInt(t)}
+function De(t){return BigInt(t)}
+function Le(t){return BigInt(t)}
+function Re(t){return BigInt(t)}
+function Fe(t){return BigInt(t)}
+function Ue(t){return BigInt(t)}
+</script>
+
+<!-- ✅ 主业务逻辑 -->
+<script type="module" src="index.js"></script>
+</head>
+<body>
+  <h1>🪦 Gravemark Controller</h1>
+
+  <button id="connect">🔌 Connect Wallet</button>
+  <div id="wallet-status"></div>
+  <br><br>
+
+  <button id="mint">👹 Mint Monster</button>
+  <br><br>
+
+  <input id="attack-id" placeholder="Enter Monster ID to Attack" />
+  <button id="attack">⚔️ Attack</button>
+  <br><br>
+
+  <button id="rewards">🎁 Check My Rewards</button>
+  <div id="rewards-list"></div>
+  <br><br>
+
+  <input id="status-id" placeholder="Enter Monster ID to Check Status" />
+  <button id="check-status">🧿 Check Monster Status</button>
+  <div id="monster-status"></div>
+</body>
+</html>
+
+
+
+
